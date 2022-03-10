@@ -16,7 +16,11 @@ public class Conta {
 	}
 	
 	public void deposito(double valor) {
-		this.saldo = this.saldo + valor;
+		if(valor < 0) {
+			System.out.println("Não é possível depositar valor negativo.");
+		} else {
+			this.saldo = this.saldo + valor;	
+		}
 		
 	}
 	
@@ -25,7 +29,7 @@ public class Conta {
 			this.saldo = this.saldo - valor;
 			return true;
 		} else {
-			System.out.println("Saldo insuficiente.");
+			System.out.println("Saldo insuficiente. " + this.informacoesCliente.getNome());
 			return false;
 		}
 	}
@@ -36,11 +40,12 @@ public class Conta {
 			if (destino.chavePix == chavePix) {
 				destino.deposito(valor);
 			} else {
+				this.saldo += valor;
 				System.out.println("Não foi possivel realizar a transferencia, chave invalida. \n");
 			}
 			return true;
 		} else {
-			System.out.println("Saldo insuficiente.");
+			System.out.println("Saldo insuficiente da conta do " + this.informacoesCliente.getNome());
 			return false;
 		}
 	}
